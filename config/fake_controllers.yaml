@@ -1,0 +1,36 @@
+controller_list:
+  - name: fake_Mani_arm_controller
+    type: $(arg execution_type)
+    joints:
+      - mani_joint_a1
+      - mani_joint_a2
+      - mani_joint_a3
+      - mani_joint_a4
+      - mani_joint_a5
+  - name: fake_Mani_hand_controller
+    type: $(arg execution_type)
+    joints:
+      - mani_joint_a6
+  - name: fake_Sol_arm_controller
+    type: $(arg execution_type)
+    joints:
+      - sol_joint_a1
+      - sol_joint_a2
+      - sol_joint_a3
+      - sol_joint_a4
+      - sol_joint_a5
+  - name: fake_Sol_hand_controller
+    type: $(arg execution_type)
+    joints:
+      - sol_joint_a6
+  - name: fake_Rail_controller
+    type: $(arg execution_type)
+    joints:
+      - rail_mani_base_link
+initial:  # Define initial robot poses.
+  - group: Mani_arm
+    pose: Ready
+  - group: Sol_arm
+    pose: Ready
+  - group: Rail
+    pose: Home

@@ -1,0 +1,69 @@
+# Simulation settings for using moveit_sim_controllers
+moveit_sim_hw_interface:
+  joint_model_group: Mani_arm
+  joint_model_group_pose: Ready
+# Settings for ros_control_boilerplate control loop
+generic_hw_control_loop:
+  loop_hz: 300
+  cycle_time_error_threshold: 0.01
+# Settings for ros_control hardware interface
+hardware_interface:
+  joints:
+    - sol_joint_a1
+    - sol_joint_a2
+    - sol_joint_a3
+    - sol_joint_a4
+    - sol_joint_a5
+    - sol_joint_a6
+    - rail_mani_base_link
+    - mani_joint_a1
+    - mani_joint_a2
+    - mani_joint_a3
+    - mani_joint_a4
+    - mani_joint_a5
+    - mani_joint_a6
+  sim_control_mode: 1  # 0: position, 1: velocity
+# Publish all joint states
+# Creates the /joint_states topic necessary in ROS
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+controller_list:
+  - name: Mani_arm_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      - mani_joint_a1
+      - mani_joint_a2
+      - mani_joint_a3
+      - mani_joint_a4
+      - mani_joint_a5
+  - name: Mani_hand_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      mani_joint_a6
+  - name: Sol_arm_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      - sol_joint_a1
+      - sol_joint_a2
+      - sol_joint_a3
+      - sol_joint_a4
+      - sol_joint_a5
+  - name: Sol_hand_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      sol_joint_a6
+  - name: Rail_controller
+    action_ns: follow_joint_trajectory
+    default: True
+    type: FollowJointTrajectory
+    joints:
+      rail_mani_base_link
